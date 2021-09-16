@@ -9,6 +9,7 @@ import com.example.roomdatabase.Database.ContactDatabase
 import com.example.roomdatabase.Entity.Contact
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,14 +20,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        database = Room.databaseBuilder(applicationContext,
-
-            ContactDatabase::class.java,
-            "contactDB").build()
+//        database = Room.databaseBuilder(applicationContext,
+//
+//            ContactDatabase::class.java,
+//            "contactDB").build()
+        database = ContactDatabase.getDatabase(this)
+        val database2 = ContactDatabase.getDatabase(this)
 
         GlobalScope.launch{
 
-            database.contactDao().insertContact(Contact(0,"Jhon","11111"))
+            database.contactDao().insertContact(Contact(0,"Jhon","11111", Date()))
 
         }
 
